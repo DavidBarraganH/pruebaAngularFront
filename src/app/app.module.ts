@@ -25,11 +25,12 @@ import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.com
   
   declarations: [
     AppComponent,
-    UsuariosComponent,
-    FormularioRegistroComponent,
     PaletteComponent,
-    AlertDialogComponent
+    UsuariosComponent,
+    AlertDialogComponent,
+    FormularioRegistroComponent
   ],
+  entryComponents: [AlertDialogComponent],
   imports: [
     BrowserModule,
     FormsModule,

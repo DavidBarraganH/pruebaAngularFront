@@ -4,7 +4,7 @@ import { FieldValidator } from '../../field.validator';
 import { AccessBankService } from '../../services/access.bank.service';
 import { DatePipe } from '@angular/common';
 
-import {  MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 
 @Component({
@@ -18,9 +18,8 @@ export class FormularioRegistroComponent implements OnInit {
 
   public new_client :any;
   public datePipeString : string;
-  public isRegistered: boolean;
-  public ids = [];
-  public message:string;
+  ids = [];
+  message:string;
 
   constructor(
     /* Utilizada para los dialogos */
@@ -32,8 +31,6 @@ export class FormularioRegistroComponent implements OnInit {
     /* LLamada a AccessBankService: Servicio de Api   */
     private _requestAccessBankService:  AccessBankService
   ) {
-
-    this.isRegistered = false;
     this.new_client = {
         "birthdate": "",
         "firstname": "",
@@ -115,31 +112,35 @@ export class FormularioRegistroComponent implements OnInit {
     if(this.form.status === 'VALID'){
 
       /* Se verifica que no exista la identificacion */
-      this.isRegistered  =false;
+   
       let promise = new Promise((resolve, reject) => {
           this._requestAccessBankService.getClientes().subscribe(
                 response => {
                    let entries =  Object.entries(response);
            
-                     for (let [fruit, count] of entries) {
+                     for (let [key, count] of entries) {
                        this.ids.push(count.identification);    
                      }
          
                      if(this.ids.includes(this.form.value.identification)){
-                       this.isRegistered = true;
-                       resolve(this.isRegistered);
-                     }
+                       resolve(true);
+                     }else{ resolve(false);}
                },
              error => {}
            );
-           resolve(this.isRegistered);   
+            
       });
    
+      
       let item = await promise;
-      if(this.isRegistered){
-          this.openAlertDialog('<span >Error:</span> \n La identificacion ya existe, ingresa otra. ');
+   
+      if(item){
+          this.openAlertDialog('Error: La identificacion ya existe, ingresa otra. ');
          return;
       }
+
+
+
 
       /* Se verifica la edad: */
       this.new_client.birthdate =  this.datePipe.transform(this.form.value.birthdate,'dd-MM-yyyy');
