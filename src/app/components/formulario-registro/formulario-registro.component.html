@@ -1,0 +1,50 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="example-container">
+
+        <mat-form-field class="example-full-width">
+        
+              <input required  [formControl]="f.birthdate" matInput [matDatepicker]="picker" placeholder="Ingresa tu Fecha de nacimiento">
+              <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+              <mat-datepicker #picker color="accent"></mat-datepicker>
+
+          <mat-error *ngIf="f.birthdate.invalid">{{getErrorMessge(1)}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+          <input  type="text" [formControl]="f.firstname" required matInput  placeholder="Ingresa tu nombre">
+          <mat-error *ngIf="f.firstname.invalid">{{getErrorMessge(2)}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input  type="text" [formControl]="f.lastname" required matInput  placeholder="Ingresa tu apellido">
+            <mat-error *ngIf="f.lastname.invalid">{{getErrorMessge(3)}}</mat-error>
+        </mat-form-field>
+    
+  
+        <mat-form-field class="example-full-width">
+            <input  type="number"  min="0" [formControl]="f.identification" required matInput  placeholder="Ingresa tu identificacion">
+            <mat-error *ngIf="f.identification.invalid">{{getErrorMessge(4)}}</mat-error>
+        </mat-form-field>
+    
+    <br>
+      <button mat-raised-button type="submit" color="accent" class="btn-custom-size">
+          <mat-icon>save</mat-icon>
+        <span class="accent-color">Guardar</span> 
+      </button>
+    
+    </div>
+
+</form>
+
+<mat-dialog-content>
+    <p>
+      {{message}}
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1"><span  class="accent-color"> {{confirmButtonText}}</span></button>
+    <button mat-raised-button mat-dialog-close tabindex="-1"><span class="accent-color">{{cancelButtonText}}</span></button>
+  </mat-dialog-actions>
+
+
