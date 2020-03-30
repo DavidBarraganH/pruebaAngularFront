@@ -5,7 +5,6 @@ import { AccessBankService } from '../../services/access.bank.service';
 import { DatePipe } from '@angular/common';
 
 import {  MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 
 @Component({
@@ -21,6 +20,7 @@ export class FormularioRegistroComponent implements OnInit {
   public datePipeString : string;
   public isRegistered: boolean;
   public ids = [];
+  public message:string;
 
   constructor(
     /* Utilizada para los dialogos */

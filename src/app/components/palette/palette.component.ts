@@ -18,7 +18,6 @@ export class PaletteComponent implements OnInit {
 
 
    refresh(a) {
-    console.log("refres() eejecutandose");
     this.loadComponentUsers=false;
     setTimeout(x=>this.loadComponentUsers=true);
  }

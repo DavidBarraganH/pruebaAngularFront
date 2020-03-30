@@ -1,6 +1,5 @@
 import { Component,ViewChild, OnInit} from '@angular/core';
 import { AccessBankService } from '../../services/access.bank.service';
-import { DatePipe, TitleCasePipe } from '@angular/common';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -46,7 +45,6 @@ export class UsuariosComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log("Cargando componente usuarios");
   }
     
   applyFilter(filterValue: string) { 
